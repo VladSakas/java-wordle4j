@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.yandex.practicum.WordleGame.WORD_LENGTH;
+
 public class WordleDictionaryLoader {
 
     private final PrintWriter logger;
@@ -27,14 +29,14 @@ public class WordleDictionaryLoader {
             while ((line = reader.readLine()) != null) {
                 String word = WordUtils.formatWord(line);
 
-                if (word.length() == 5) {
+                if (word.length() == WORD_LENGTH) {
                     words.add(word);
                 }
             }
 
             if (words.isEmpty()) {
-                logger.println("ОШИБКА! В файле " + fileName + " нет слов из 5 букв!");
-                throw new DictionaryLoadException("В файле " + fileName + " нет слов из 5 букв!");
+                logger.println("ОШИБКА! В файле " + fileName + " нет слов из " + WORD_LENGTH + " букв!");
+                throw new DictionaryLoadException("В файле " + fileName + " нет слов из " + WORD_LENGTH + " букв!");
             }
 
         } catch (IOException e) {

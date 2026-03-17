@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 public class WordleGame {
+    public static final int WORD_LENGTH = 5;
+    public static final int MAX_ATTEMPTS = 6;
 
     private final String answer;
     private int stepsLeft;
@@ -29,7 +31,7 @@ public class WordleGame {
         this.dictionary = dictionary;
         this.logger = logger;
         this.answer = dictionary.getRandomWord();
-        this.stepsLeft = 6;
+        this.stepsLeft = MAX_ATTEMPTS;
         this.guesses = new ArrayList<>();
         this.hints = new ArrayList<>();
         this.isWin = false;
@@ -38,7 +40,7 @@ public class WordleGame {
 
     private String analyzeGuess(String input) throws InvalidWordLengthException {
 
-        if (input.length() != 5) {
+        if (input.length() != WORD_LENGTH) {
             throw new InvalidWordLengthException("Слова должны состоять из 5 букв!");
         }
 
@@ -78,9 +80,9 @@ public class WordleGame {
 
         String formattedWord = WordUtils.formatWord(word);
 
-        if (formattedWord.length() != 5) {
-            logger.println("Ошибка! Слово " + word + " должно состоять из 5 букв!");
-            throw new InvalidWordLengthException("Слово должно состоять из 5 букв!");
+        if (formattedWord.length() != WORD_LENGTH) {
+            logger.println("Ошибка! Слово " + word + " должно состоять из " + WORD_LENGTH + " букв!");
+            throw new InvalidWordLengthException("Слово должно состоять из " + WORD_LENGTH + " букв!");
         }
 
         if (!dictionary.containsWord(formattedWord)) {
